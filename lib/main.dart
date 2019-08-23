@@ -13,7 +13,7 @@ void main() async {
 }
 
 SharedPreferences prefs;
-final Connect connect = Connect(host: '35.204.122.168');
+final Connect connect = Connect(host: 'localhost');
 List<Ward> wards = [];
 
 class MyApp extends StatelessWidget {

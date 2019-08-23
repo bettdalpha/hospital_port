@@ -106,13 +106,16 @@ class _HospitalDashState extends State<HospitalDash> {
   }
 
   Widget createHospitalTileReport(HospitalReport report) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(7.0)),
-      child: ListTile(
-        title: Text(report.name),
-        trailing: Text('${report.count}'),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10),      
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(7.0)),
+        child: ListTile(
+          title: Text(report.name),
+          trailing: Text('${report.count}'),
+        ),
       ),
     );
   }

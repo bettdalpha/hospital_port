@@ -65,7 +65,7 @@ class _TreatmentPageState extends State<TreatmentPage> {
                   'Select the hospital you were treated to add treatment details'),
             ),
             FutureBuilder<Hospitals>(
-                future: Connect(host: '35.204.122.168').senderClient.getHospitals(
+                future: Connect(host: 'localhost').senderClient.getHospitals(
                       Mess()..mess = searchTextController.text,
                     ),
                 builder: (context, snapshot) {
