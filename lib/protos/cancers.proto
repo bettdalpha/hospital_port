@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+service Sender {
+    rpc SendPatientData(PatientData) returns (InsertResponse);
+    rpc SendMessage(Mess) returns (InsertResponse);
+    rpc GetWard(Location) returns (WardInfo);
+    rpc GetHospitals(Mess) returns (Hospitals);
+    rpc RegisterHospital(HospitalData) returns (InsertResponse);
+    rpc AddTreatment(TreatmentDetails) returns (InsertResponse);
+    rpc AddHospitalSpecialization(NewTreatment) returns (InsertResponse);
+    rpc AuthenticateHospital(Auth) returns (Hospital);
+    rpc AuthenticateUser(Auth) returns (PatientData);
+    rpc GetHospitalReport(Mess) returns (FullHospitalReport);
+}
+message Mess {
+    string mess = 1;
+}
+
+message PatientData {
+    Person person = 1;
+    Cancer cancer = 2;
+}
+
+message TreatmentDetails {
+    string treatment = 1;
+    string patientID = 2;
+    string hospitalID = 3;
+    int32 cost = 4;
+    string date = 5;
+}
+
+message Person {
+    string firstname = 1;
+    string lastname = 2;
+    string gender = 3;
+    string profession = 4;
+    string birthplace = 5;
+    int32 age = 6;
+    string bloodgroup = 7;
+    Location location = 8;
+    WardInfo wardname = 9;
+    string patientID = 10;
+}
+
+message HospitalData {
+    string hospitalname = 1;
+    string email = 2;
+    Location location = 3;
+    repeated string specialization = 4;
+    string guid = 5;
+    WardInfo info = 6;
+    string password = 7;
+}
+
+message HospitalReport {
+    string name = 1;
+    int32 count = 2;
+}
+
+message FullHospitalReport {
+    repeated HospitalReport reports = 1;
+}
+
+message Auth {
+    string uuid = 1;
+    string password = 2;
+}
+
+message NewTreatment {
+    string hospitalID = 1;
+    string specialization = 2;
+}
+
+message Cancer {
+    string cancertype = 1;
+    string originorgan = 2;
+    int32 stage = 3;
+    string origindate = 4;
+}
+
+message InsertResponse {
+    string response = 1;
+    Status status = 2;
+}
+
+message WardInfo {
+    string wardname = 1;
+    string constituency = 2;
+    string county = 3;
+}
+
+message Location {
+    double lat = 1;
+    double lon = 2;
+}
+
+enum Status {
+    OK = 0;
+    ERROR = 1;
+    DUPLICATE = 2;
+}
+
+message Hospital {
+    string name = 1;
+    string guid = 2;
+    WardInfo wardinfo = 3;
+    Location location = 4;
+    repeated string specialization = 5;
+}
+
+message Hospitals {
+    repeated Hospital hospitals = 1;
+}
+
+// protoc --dart_out=grpc:lib/src/protos/generated/ -I lib/src/protos/ lib/src/protos/cancers.proto
