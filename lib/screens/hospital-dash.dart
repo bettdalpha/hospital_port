@@ -73,6 +73,14 @@ class _HospitalDashState extends State<HospitalDash> {
                       );
                       break;
                     case ConnectionState.done:
+                      if (snapshotdata.data == null) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text('No Patients Treated yet'),
+                          ),
+                        );
+                      }
                       if (snapshotdata.data.reports.length == 0) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -87,7 +95,8 @@ class _HospitalDashState extends State<HospitalDash> {
                           children: <Widget>[
                             for (HospitalReport report
                                 in snapshotdata.data.reports)
-                              createHospitalTileReport(report)
+                              createHospitalTileReport(report),
+                            // SizedBox(height: 10,)
                           ],
                         ),
                       );
@@ -106,13 +115,16 @@ class _HospitalDashState extends State<HospitalDash> {
   }
 
   Widget createHospitalTileReport(HospitalReport report) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(7.0)),
-      child: ListTile(
-        title: Text(report.name),
-        trailing: Text('${report.count}'),
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(7.0)),
+        child: ListTile(
+          title: Text(report.name),
+          trailing: Text('${report.count}'),
+        ),
       ),
     );
   }

@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     }
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Hospital CancerReg Portal',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xfff8bbf6),

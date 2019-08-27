@@ -64,9 +64,9 @@ class _RegisterHospitalState extends State<RegisterHospital> {
                     type: DataType.TEXT,
                   ),
                   SizedBox(height: 20),
-                  Text('Your current location'),
+                  Text('Your current hospital location'),
                   NiceButton(
-                    title: 'Press to locate you',
+                    title: 'Add current hospital coordinates',
                     todo: () async {
                       var locat = await Geolocation().getLocation();
                       setState(() {
@@ -138,6 +138,10 @@ class _RegisterHospitalState extends State<RegisterHospital> {
           child: NiceButton(
             title: 'Register and Log in',
             todo: () async {
+              if(location==null){
+                Toast.show('Please add your coordinates by pressing locate me button',context, duration:3);
+                return;
+              }
               var wardinfo = WardInfo()
                 ..wardname = ward.ward
                 ..county = ward.county
